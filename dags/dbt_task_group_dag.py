@@ -21,16 +21,16 @@ DBT_PROJECT_NAME = "real_estate_dbt_project"
 DBT_EXECUTABLE_PATH = "/usr/local/airflow/dbt_venv/bin/dbt"
 # ! this looks suspicious
 # The path to your dbt root directory
-# DBT_ROOT_PATH = "/usr/local/airflow/dags/dbt"
-DBT_ROOT_PATH = "/usr/local/airflow/dags/real_estate_data_dbt_project"
+DBT_ROOT_PATH = "/usr/local/airflow/dags/dbt"
+# DBT_ROOT_PATH = "/usr/local/airflow/dags/real_estate_dbt_project"
 
 
 @dag(
-    start_date=datetime(2023, 6, 1),
+    start_date=datetime(2023, 7, 1),
     schedule=None,
     catchup=False,
 )
-def dbt_task_group_dag():
+def my_simple_dbt_dag():
     DbtTaskGroup(
         group_id="transform_data",
         dbt_project_name=DBT_PROJECT_NAME,
@@ -39,9 +39,9 @@ def dbt_task_group_dag():
         dbt_args={
             "dbt_executable_path": DBT_EXECUTABLE_PATH,
             "schema": SCHEMA_NAME,
-            "vars": '{"my_name": "Astro", "SNOWFLAKE_DATABASE":"analytics"}',
+            "vars": '{"my_name": "Astro"}',
         },
     )
 
 
-dbt_task_group_dag()
+my_dag = my_simple_dbt_dag()
