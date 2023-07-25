@@ -30,9 +30,9 @@ DBT_ROOT_PATH = "/usr/local/airflow/dags/dbt"
     schedule=None,
     catchup=False,
 )
-def my_simple_dbt_dag():
+def transform_data_dbt_task_group_dag():
     DbtTaskGroup(
-        group_id="transform_data",
+        group_id="transform_real_estate_data",
         dbt_project_name=DBT_PROJECT_NAME,
         conn_id=CONNECTION_ID,
         dbt_root_path=DBT_ROOT_PATH,
@@ -44,4 +44,4 @@ def my_simple_dbt_dag():
     )
 
 
-my_dag = my_simple_dbt_dag()
+my_dag = transform_data_dbt_task_group_dag()
