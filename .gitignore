@@ -4,3 +4,4 @@
 airflow_settings.yaml
 __pycache__/
 astro
+dags/dbt/real_estate_dbt_project/logs
