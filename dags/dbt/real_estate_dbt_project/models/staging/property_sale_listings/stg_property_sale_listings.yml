@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_property_sale_listings
+    description: Staged property sale listings data for single-family homes in a particular zipcode.
+    columns:
+      - name: addr_iteration_date_id
+        description: Concatenation of Address (in ID form) with the Iteration Date when the data was fetched.
+        tests:
+          - unique
+          - not_null
+      - name: iteration_date
+        description: Date (with timestamp removed) when the data was inserted into the raw schema from the API.
+        tests:
+          - not_null
+      - name: id
+        description: Address of the home in id form (Ex. 123-Muffin-Man-Ln,-Seattle,-WA-12345)
+      - name: listed_date
+        description: Date the home was listed.
+      - name: formatted_address
+        description: Properly-formatted address of the home (Ex. 123 Muffin Man Ln, Seattle, WA 12345)
+      - name: num_bathrooms
+        description: Number of bathrooms in the home (can be a decimal for half-baths).
+      - name: num_bedrooms
+        description: Number of bedrooms in the home.
+      - name: days_on_market
+        description: Number of days on the market.
+      - name: price
+        description: Price of the home.

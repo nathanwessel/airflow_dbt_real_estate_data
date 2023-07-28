@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: realty_mole_property_api
+    description: Real estate API, with list of homes for-sale and for-rent.
+    database: raw
+    schema: realty_mole_property_api
+    tables:
+      - name: property_sale_listings
+        description: Raw property_sale_listings data for a particular zipcode (to limit data).
+        columns:
+          - name: _AIRBYTE_PROPERTY_SALE_LISTINGS_HASHID
+            description: Unique key for the property, but not unique between iterations (_AIRBYTE_EMMITED_AT)
+            tests:
+              - not_null
+          - name: _AIRBYTE_EMITTED_AT
+            description: Datetime when Airbyte emitted the listing result
+            tests:
+              - not_null

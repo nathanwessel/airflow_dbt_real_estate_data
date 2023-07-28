@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: beds_baths_median_price
+    description: Shows the median price for a given number of bedrooms, bathrooms, and an iteration date. (Data gathering methods not completely accurate)
+    columns:
+      - name: id
+        description: Primary key column (hash value) for this beds_baths_median_price model.
+        tests:
+          - unique
+          - not_null
+      - name: num_bedrooms
+        description: Number of bedrooms in the home.
+      - name: num_bathrooms
+        description: Number of bathrooms in the home (can be a decimal for half-baths).
+      - name: iteration_date
+        description: Date (with timestamp removed) when the data was inserted into the raw schema from the API.
+        tests:
+          - not_null
+      - name: median_price
+        description: Median price of the home for this number of bedrooms, bathrooms, and iteration date.
+  
+  - name: distinct_num_baths_per_iteration
+    description: Shows the number of bathroom configurations (ex. 1 bath, 1.5 bath, etc.), and how many times each configuration occurs. (Data gathering methods not completely accurate)
+    columns:
+      - name: id
+        description: Primary key column (hash value) for this distinct_num_baths_per_iteration model.
+        tests:
+          - unique
+          - not_null
+      - name: iteration_date
+        description: Date (with timestamp removed) when the data was inserted into the raw schema from the API.
+        tests:
+          - not_null
+      - name: num_bathrooms
+        description: Number of bathrooms in the home (can be a decimal for half-baths).
+      - name: count
+        description: Number of listings in the data where this configuration of bathrooms occurs on a given iteration date. 
+  
+  - name: distinct_num_bedrooms_per_iteration
+    description: Shows the number of bedroom configurations, and how many times each configuration occurs. (Data gathering methods not completely accurate)
+    columns:
+      - name: id
+        description: Primary key column (hash value) for this distinct_num_baths_per_iteration model.
+        tests:
+          - unique
+          - not_null
+      - name: iteration_date
+        description: Date (with timestamp removed) when the data was inserted into the raw schema from the API.
+        tests:
+          - not_null
+      - name: num_bedrooms
+        description: Number of bedrooms in the home.
+      - name: count
+        description: Number of listings in the data where this configuration of bedrooms occurs on a given iteration date.
+  
+  - name: price_buckets_days_on_market
+    description: Shows the number of which fall into pre-determined (in the model) price buckets. (Data gathering methods not completely accurate)
+    columns:
+      - name: id
+        description: Primary key column (hash value) for this distinct_num_baths_per_iteration model.
+        tests:
+          - unique
+          - not_null
+      - name: iteration_date
+        description: Date (with timestamp removed) when the data was inserted into the raw schema from the API.
+        tests:
+          - not_null
+      - name: price_bucket
+        description: Pre-defined (in the model) price bucket.
+        tests:
+          - not_null
+      - name: avg_days_on_market
+        description: The average number of days the house (in this iteration_date and price range) has been on the market (rounded to two decimal places).
+  
+  
